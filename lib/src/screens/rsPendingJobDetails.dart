@@ -8,6 +8,7 @@ import 'package:m_n_r/src/blocs/bloc.dart';
 import 'package:m_n_r/src/blocs/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:m_n_r/src/models/reachStackerModel.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class RSPendingJobDetails extends StatefulWidget {
   
@@ -69,8 +70,12 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
     return MaterialApp(
       title: 'Reach Stacker Equipment Job Update',
       home: Scaffold(
-        appBar: AppBar(centerTitle: true,
-        title: Text('Reach Stacker Equipment Job Update', style: txtRoboBoldHiLightColor(30,Colors.white),),),
+        appBar: AppBar(
+        centerTitle: true,
+        elevation: 10.0,
+        bottomOpacity: 2.0,
+        backgroundColor: Color(0XFF0091EA),
+        title: Text('Reach Stacker Equipment Job Update', style: txtRoboBoldHiLightColor(25,Colors.white),),),
         body: rsPJDetail(bloc),
       ),
     );
@@ -88,10 +93,12 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
     
     bloc.fetchRSPJobDetail(widget.rsItem);
 
-    return  SingleChildScrollView( child:
-      Container( //height: 400.00, width:600.00 ,
+    return SingleChildScrollView(child:Card(
+      elevation: 10.0,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child:Container( //height: 400.00, width:600.00 ,
       alignment: Alignment.center,
-      decoration: BoxDecoration( border: Border.all(color: Colors.blueGrey ,width: 5)),
+      // decoration: BoxDecoration( border: Border.all(color: Colors.blueGrey ,width: 5)),
       padding: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
@@ -111,25 +118,27 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
           Row(mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
             SizedBox(width: 250),
-            Expanded( child: new OutlineButton(  
+            Expanded( child: new MaterialButton(
+              color: Colors.lightBlueAccent[700],  
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
-              child: new Text("<< Back <<", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
+              child: new Text("Back", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
               onPressed: () {Navigator.of(context).pop();},
-              borderSide: BorderSide(color: Colors.blue),
+              // borderSide: BorderSide(color: Colors.blue),
               //shape: StadiumBorder(),
             )),
             SizedBox(width: 20.0,),
-            Expanded( child: new OutlineButton(
+            Expanded( child: new MaterialButton(
+              color: Colors.lightBlueAccent[700],  
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
               child: new Text("Save", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
               onPressed: () { saveRSPendingJob(bloc); Navigator.of(context).pop();},
-              borderSide: BorderSide(color: Colors.blue),
+              // borderSide: BorderSide(color: Colors.blue),
             )),
             SizedBox(width: 10.0,),
           ],),
         ],
       ),
-    ));
+     )));
   }
 
   Widget txtfldContNo(Bloc bloc){
@@ -148,15 +157,12 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
             decoration: InputDecoration(
             labelStyle: lblRoboStyle(20),
             hintText: '',
-            labelText: 'Container No.:',
+            labelText: 'Container No.',
             errorText: snapshot.error,
-            
             ),
           );
         }
-      
       );
-    
   }
   
   Widget ddcontSize(Bloc bloc){
@@ -178,7 +184,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
                                           child: Text(dropDownStringitem.lookupDescription,
                                                   style: txtRoboStyle(20),)
                                           );
-              },
+                                        },
               ).toList(),
 
               onChanged: bloc.changersContSize,
@@ -197,7 +203,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
   Widget ddcontType(Bloc bloc){
     return StreamBuilder(
       stream: bloc.rsContType,
-      builder: (context, snapshot) 
+      builder: (context, snapshot)
       { 
         return FutureBuilder(
           future: fillLookups('EquipmentType'),
@@ -281,7 +287,8 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
               isExpanded: true,
               elevation: 8,
             );
-            } else {return CircularProgressIndicator();}
+            } else {return JumpingDotsProgressIndicator(
+              fontSize: 50.0,color: Colors.blue,);}
           });   
       });
     }
@@ -319,7 +326,8 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
             }
             else
             {
-              return CircularProgressIndicator();
+              return JumpingDotsProgressIndicator(
+              fontSize: 50.0,color: Colors.blue,);
             }
           }
         );
@@ -328,7 +336,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
 
   }
 
-  void saveRSPendingJob(Bloc bloc) async {
+void saveRSPendingJob(Bloc bloc) async {
     ReachStackerDetail rsDetails = new ReachStackerDetail();
     await rsDetails.saveRSPendingJob(bloc.getRSDetail(widget.loginInfo, widget.rsItem))
     .then((isSuccess) { if(isSuccess) { _showAlert(context,'Reach Stacker Equipment Saved'); Navigator.of(context).pop(); }},

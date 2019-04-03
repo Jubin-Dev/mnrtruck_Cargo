@@ -30,15 +30,19 @@ class RSPendingEquipJobsHome extends State<RSPendingEquipJobs> with TxtCss {
     return MaterialApp(
       title: 'Reach Staker Pending Jobs list',
       home: Scaffold(
-        appBar: AppBar(centerTitle: true,
+        appBar: AppBar(
+          centerTitle: true,
+          elevation: 10.0,
+          bottomOpacity: 2.0,
+          backgroundColor: Color(0XFF0091EA),
           title: Text('Reach Staker Pending Equipment Jobs', 
-                      style: txtRoboBoldHiLightColor(30, Colors.white),),
-          actions: <Widget>[ 
-            IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
+          style: txtRoboBoldHiLightColor(25, Colors.white),),
+          leading:
+            IconButton(icon: Icon(Icons.arrow_back), iconSize: 40.00, 
               onPressed: (){Navigator.push(context, new MaterialPageRoute(
                             builder: (context) =>
                             new InitScreen(loginInfo: widget.loginInfo),
-                            maintainState: false));},),],),          
+                            maintainState: false));},),),          
           body: rsPendingJobs(context, bloc),
       ),
     );

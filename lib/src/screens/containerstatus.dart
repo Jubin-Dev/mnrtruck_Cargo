@@ -92,9 +92,9 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
           // txtFldCurrentContStatus(bloc),
           // SizedBox(height: 20.00),
           ddcontStatus(bloc),
-          SizedBox(height: 20.00),
+          SizedBox(height: 10.00),
           txtFldremarks(bloc),
-          SizedBox(height: 50.00),
+          SizedBox(height: 60.00),
           Row(mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
             SizedBox(width: 250),

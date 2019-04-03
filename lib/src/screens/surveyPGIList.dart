@@ -21,6 +21,8 @@ class SurveyPGIn extends StatefulWidget {
 
 class SurveyPGInHome extends State<SurveyPGIn> with TxtCss {
   var sizeHW;
+  static const double _dataRowHeight = 48.0;
+  static const double _tablePadding = 24.0;
 
   Widget build(context) {
 
@@ -61,9 +63,7 @@ class SurveyPGInHome extends State<SurveyPGIn> with TxtCss {
                 onPressed: (){_showSurveyScreen(context, widget.loginInfo);},),
                                 // SizedBox(width: 20,)
               ),
-      
-
-    );
+        );
   }
 
 Widget surveyPGInScreen(BuildContext context, Bloc bloc) {
@@ -91,8 +91,8 @@ Widget surveyPGInScreen(BuildContext context, Bloc bloc) {
 
   Widget _displayDataTable(Bloc bloc) {
     //return Container(height: ((48.5/100)*sizeHW.height), color: Colors.blueAccent,);
-      NumScroller numscrl = new NumScroller(height:600.0, width: sizeHW.width, alignment: TextAlign.left,
-                                            min:1, max:1000, bloc:bloc, loginUsrInfo: widget.loginInfo,);
+      NumScroller numscrl = new NumScroller(height:670.0, width: sizeHW.width, alignment: TextAlign.center,
+                                            min:5, max:1000, bloc:bloc, loginUsrInfo: widget.loginInfo,);
       return numscrl;
   }
  
@@ -115,7 +115,7 @@ Widget surveyPGInScreen(BuildContext context, Bloc bloc) {
       },
     );
   }
-
+    
   _showSurveyScreen(BuildContext context, LoginUserInfo loginUsrinfo)
   {  
     //print('Entering Pre Gate-In');
@@ -152,7 +152,7 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
         decoration: const BoxDecoration(color: Colors.white),
         width: widget.width,
         height: widget.height,
-        child: ListView(padding: EdgeInsets.all(5.0), 
+        child: ListView(padding: EdgeInsets.all(6.0), 
           addRepaintBoundaries: true,
           children: <Widget>[
             SingleChildScrollView(
@@ -193,11 +193,13 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
             DataColumn(label: Expanded(child:Text('Type', style: lblRoboStyle(fntSize))), 
               numeric: false, onSort: (i,b){},),
             ],
-          rows: surPGInHdList.map((sPGInHdlist) => DataRow(
+            rows: surPGInHdList.map((sPGInHdlist) => DataRow(
           
                 //onSelectChanged: (b){},
                 //selected: false,
-                cells: <DataCell>[
+                
+              cells: <DataCell>[
+
                   DataCell(SizedBox.fromSize(size: Size(200, 100),
                             child:Text(sPGInHdlist.documentNo, 
                             style: txtRoboULStyle(fntSize), softWrap: true,)),

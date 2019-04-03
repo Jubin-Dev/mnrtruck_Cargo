@@ -135,7 +135,7 @@ class SurveyHome extends State<Survey> with TxtCss {
         children: <Widget>[
           Row( children: <Widget>[
             Expanded(flex: 6, child: _displayPic(context, bloc)),
-            Expanded(flex: 3, child: _displayFields(bloc)),
+            Expanded(flex: 2, child: _displayFields(bloc)),
           ],),
           Row(children: <Widget>[ Expanded(flex:10,child: _displayTblHeading() ),],),
           Row(children: <Widget>[ Expanded(flex:10, child: _displayDataTable(bloc),)],)  
