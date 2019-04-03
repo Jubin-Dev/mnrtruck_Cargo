@@ -5,6 +5,7 @@ import 'package:m_n_r/src/txtCss.dart';
 import 'package:m_n_r/src/models/usermodel.dart';
 import 'package:m_n_r/src/blocs/bloc.dart';
 import 'package:m_n_r/src/blocs/provider.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class ContainerStatus extends StatefulWidget {
   
@@ -49,7 +50,11 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
       title: 'Container Status Update',
       home: Scaffold(
         appBar: AppBar(centerTitle: true,
-        title: Text('Container Status Update', style: txtRoboBoldHiLightColor(30,Colors.white),),),
+        title: Text('Container Status Update', style: txtRoboBoldHiLightColor(25,Colors.white),),
+          bottomOpacity: 2.0,
+          backgroundColor: Color(0XFF0091EA),
+          elevation: 10.0,
+        ),
         body: containerStatusScreen(bloc),
       ),
     );
@@ -58,43 +63,48 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
   Widget containerStatusScreen(Bloc bloc) {
     return Row(children: <Widget>[
       Expanded(flex:2, child:Container()),
-      Expanded(flex:6, child:_displayFeilds(bloc)),
+      Expanded(flex:8, child:_displayFeilds(bloc)),
       Expanded(flex:2, child:Container())      
     ],);
   }
 
   Widget _displayFeilds(Bloc bloc){
     return  SingleChildScrollView( child: 
-      Container( //height: 400.00, width:600.00 ,
-      alignment: Alignment.center,
-      decoration: BoxDecoration( border: Border.all(color: Colors.blueGrey ,width: 5)),
-      padding: EdgeInsets.all(10),      
+      Card( 
+        elevation: 10.0,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+             //height: 400.00, width:600.00 ,
+      // alignment: Alignment.center,
+       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),),
+      // padding: EdgeInsets.all(10),      
       child: Column(
         children: <Widget>[
           txtfldContNo(bloc),
-          SizedBox(height: 10.00),
+          SizedBox(height: 30.00),
           // txtFldCurrentContStatus(bloc),
           // SizedBox(height: 20.00),
           ddcontStatus(bloc),
-          SizedBox(height: 10.00),
+          SizedBox(height: 20.00),
           txtFldremarks(bloc),
           SizedBox(height: 20.00),
           Row(mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
             SizedBox(width: 250),
-            Expanded( child: new OutlineButton(  
+            Expanded( child: new MaterialButton(  
+               color: Colors.lightBlueAccent[700],
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
-              child: new Text("<< Back <<", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
+              child: new Text("Back", style: txtRoboBoldHiLightColor(25, Colors.white)),
               onPressed: () {Navigator.of(context).pop();},
-              borderSide: BorderSide(color: Colors.blue),
+              // borderSide: BorderSide(color: Colors.blue),
               //shape: StadiumBorder(),
             )),
             SizedBox(width: 20.0,),
-            Expanded( child: new OutlineButton(
+            Expanded( child: new MaterialButton(
+              color: Colors.lightBlueAccent[700],
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
-              child: new Text("Save", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
+              child: new Text("Save", style: txtRoboBoldHiLightColor(25, Colors.white)),
               onPressed: () {saveContainerStatusUpdate(bloc);},
-              borderSide: BorderSide(color: Colors.blue),
+              // borderSide: BorderSide(color: Colors.blue),
             )),
             SizedBox(width: 10.0,),
           ],),
@@ -120,7 +130,7 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
             decoration: InputDecoration(
             labelStyle: lblRoboStyle(20),
             hintText: 'CONT0000000',
-            labelText: 'Container No.:',
+            labelText: 'Container No.',
             errorText: snapshot.error,
             ),
           );
@@ -179,7 +189,9 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
               isExpanded: true,
               elevation: 8,
             );
-              } else { return CircularProgressIndicator();}
+              } else { return  JumpingDotsProgressIndicator(
+  fontSize: 80.0,color: Colors.blue,
+);}
             });
     });
   }

@@ -75,7 +75,8 @@ class PregateInHome extends State<PregateIn> with TxtCss {
       title: 'Pre Gate-In',
       home:Scaffold(
         resizeToAvoidBottomPadding: false,
-        appBar: AppBar(title: Text('Container PreGate-In',style: txtRoboBoldHiLightColor(25.0, Colors.white)), centerTitle: true,bottomOpacity: 2.0,
+        appBar: AppBar(title: Text('Container PreGate-In',style: txtRoboBoldHiLightColor(25.0, Colors.white)), 
+          centerTitle: true,bottomOpacity: 2.0,
           backgroundColor: Color(0XFF0091EA),
           elevation: 10.0,
                       actions: <Widget>[
@@ -134,21 +135,21 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                             SizedBox(width: gapHight,),
                             Expanded(child:contStatus(preGInbloc)),
                         ]),                                         
-                        Row( children: <Widget>[
-                            Expanded(child:Text('Electrical Cable',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
-                            SizedBox(width: gapHight,),
-                            Expanded(child:elecCable(preGInbloc)),
-                        ]),
+                        // Row( children: <Widget>[
+                        //     Expanded(child:Text('Electrical Cable',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
+                        //     SizedBox(width: gapHight,),
+                        //     Expanded(child:elecCable(preGInbloc)),
+                        // ]),
                         Row( children: <Widget>[
                             Expanded(child:Text('Air Guide',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
                             Expanded(child:airGuide(preGInbloc)),
                         ]),                      
-                        Row( children: <Widget>[
-                            Expanded(child:Text('H M C',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
-                            SizedBox(width: gapHight,),
-                            Expanded(child:hmc(preGInbloc)),
-                        ]),
+                        // Row( children: <Widget>[
+                        //     Expanded(child:Text('H M C',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
+                        //     SizedBox(width: gapHight,),
+                        //     Expanded(child:hmc(preGInbloc)),
+                        // ]),
                         Row( children: <Widget>[
                             Expanded(child:Text('Vent',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
@@ -168,12 +169,12 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                             Expanded(child:Text('Display Temp.',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
                             Expanded(child:displayTempFld(preGInbloc)),
-                        ]),
-                        Row( children: <Widget>[
-                            Expanded(child:Text('Condition',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
-                            SizedBox(width: gapHight,),
-                            Expanded(child:cntCondition(preGInbloc)),
-                        ]),
+                          ]),
+                        // Row( children: <Widget>[
+                        //     Expanded(child:Text('Condition',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
+                        //     SizedBox(width: gapHight,),
+                        //     Expanded(child:cntCondition(preGInbloc)),
+                        // ]),
                         Row( children: <Widget>[
                             Expanded(child:Text('Additional Requirement',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
@@ -197,7 +198,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                       child: Container(                        
                         decoration: new BoxDecoration(
                               image: new DecorationImage(
-                              image: new AssetImage('lib/img/emc-container-tracking-resume-asset-solutions-from-safetrac-safe-trac-ltd.png'),
+                              image: new AssetImage('lib/img/emc-container.png'),
                               fit: BoxFit.contain,
                               ),
                       ),),
@@ -906,7 +907,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
       builder: (BuildContext context) {
         // return object of type Dialog
         return SimpleDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),),
+          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),),
           children: <Widget>[ 
           //showRadioBtn(context),
           showPopUpList(context, bloc),
@@ -978,9 +979,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
     damagecode.imageSource = pic.path;
     await bloc.updatePGIDetails(damagecode,'UPDATE');  }
   }
-
 }
-
 class NumScroller extends StatefulWidget{
   final int max,min;
   final double height,width;

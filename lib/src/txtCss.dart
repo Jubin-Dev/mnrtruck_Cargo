@@ -10,7 +10,7 @@ class TxtCss{
       fontFamily: _fntRoboto,
       fontSize: fntSize, 
       fontWeight: FontWeight.normal,
-      color: Color(0xff0d47a1));
+      color: Color(0xff7f8c8d));
   }
 
   txtRoboULStyle(double fntSize)

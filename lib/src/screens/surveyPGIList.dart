@@ -31,40 +31,54 @@ class SurveyPGInHome extends State<SurveyPGIn> with TxtCss {
       title: 'Container Pre Gate-In List for Survey',
       home: Scaffold(
         appBar: AppBar(centerTitle: true,
-          title: Text('Container Pre Gate-In List for Survey', 
-                      style: txtRoboBoldHiLightColor(30, Colors.white),),
+          title: Text('Pre Gate-In List', 
+                      style: txtRoboBoldHiLightColor(25, Colors.white),),
+                      bottomOpacity: 2.0,
+                      backgroundColor: Color(0XFF0091EA),
+                      elevation: 10.0,
           actions: <Widget>[ 
             IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
               onPressed: (){Navigator.push(context, new MaterialPageRoute(
                             builder: (context) =>
                             new InitScreen(loginInfo: widget.loginInfo),
                             maintainState: false));},),],),          
-          body: surveyPGInScreen(context, bloc),
-      ),
+              body: surveyPGInScreen(context, bloc),
+              floatingActionButton: new FloatingActionButton(
+                backgroundColor: Colors.greenAccent[700],
+                elevation: 10.0,
+                highlightElevation: 20.0,
+                isExtended: true,
+                child: new Icon(Icons.add,color: Colors.white),
+                tooltip: 'Add Survey',
+                onPressed: (){_showSurveyScreen(context, widget.loginInfo);},),
+                                // SizedBox(width: 20,)
+              ),
+      
+
     );
   }
 
-  Widget surveyPGInScreen(BuildContext context, Bloc bloc) {
+Widget surveyPGInScreen(BuildContext context, Bloc bloc) {
     return SingleChildScrollView(child: Container(
       child: Column(
         children: <Widget>[
-          Row( mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[ FlatButton( color: Colors.green, textColor: Colors.white,
-                                  child: Text('+ Add Survey'), onPressed: (){_showSurveyScreen(context, widget.loginInfo);},),
-                                SizedBox(width: 20,)],),
-          Row(children: <Widget>[ Expanded(flex:10,child: _displayTblHeading() ),],),
+        //   Row( mainAxisAlignment: MainAxisAlignment.end,
+        //     children: <Widget>[ FloatingActionButton( 
+        //                           child: Text('+ Add Survey'), onPressed: (){_showSurveyScreen(context, widget.loginInfo);},),
+        //                         SizedBox(width: 20,)],),
+          // Row(children: <Widget>[ Expanded(flex:10,child: _displayTblHeading() ),],),
           Row(children: <Widget>[ Expanded(flex:10, child: _displayDataTable(bloc),)],)  
         ],),
     ));
   }
 
-  Widget _displayTblHeading(){
-    return Container(alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(color: Colors.lightBlueAccent[200]), 
-          child: Text('  Pre Gate-In List',
-                  style: txtRoboBoldHiLightColor(25,Colors.white,)),
-    );
-  }
+// Widget _displayTblHeading(){
+//     return Container(alignment: Alignment.center,
+//           decoration: BoxDecoration(color: Colors.lightBlueAccent[700]), 
+//           child: Text('Pre Gate-In List',
+//           style: txtRoboBoldHiLightColor(25,Colors.white,)),
+//     );
+//   }
 
   Widget _displayDataTable(Bloc bloc) {
     //return Container(height: ((48.5/100)*sizeHW.height), color: Colors.blueAccent,);
@@ -86,8 +100,9 @@ class SurveyPGInHome extends State<SurveyPGIn> with TxtCss {
           Container(color: Colors.blueGrey,height: 1.0,),
           new FlatButton(child: new Text("Close",style: txtRoboStyle(25),),
                          onPressed: () {Navigator.of(context).pop();},
-          )
-        ],);
+            )
+          ],
+        );
       },
     );
   }
@@ -95,9 +110,8 @@ class SurveyPGInHome extends State<SurveyPGIn> with TxtCss {
   _showSurveyScreen(BuildContext context, LoginUserInfo loginUsrinfo)
   {  
     //print('Entering Pre Gate-In');
-    Navigator.push(context, new MaterialPageRoute(
-                                  builder: (context) =>
-                                    new Survey(loginInfo: loginUsrinfo)));
+    Navigator.push(context, new MaterialPageRoute(builder: (context) =>
+                            new Survey(loginInfo: loginUsrinfo)));
   }
 }
 
@@ -129,7 +143,7 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
         decoration: const BoxDecoration(color: Colors.white),
         width: widget.width,
         height: widget.height,
-        child: ListView(padding: EdgeInsets.all(2.0), 
+        child: ListView(padding: EdgeInsets.all(5.0), 
           addRepaintBoundaries: true,
           children: <Widget>[
             SingleChildScrollView(
@@ -154,23 +168,28 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
       future: sPGInHd.surveyPGInList(widget.loginUsrInfo.branchId),
       builder:(context, ssPGInHdList) {
         List surPGInHdList = ssPGInHdList.hasData ? ssPGInHdList.data : <SurveyPGInHd>[];
-        return DataTable(
+        return Card(
+          elevation: 30.0,
+          clipBehavior: Clip.antiAlias,
+          child:DataTable(
           sortAscending: false,
           columns: <DataColumn>[
+            
             DataColumn(label: Expanded(child: Text('Document No.', style: lblRoboStyle(fntSize))), 
               numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Container No', style: lblRoboStyle(fntSize))), 
+            DataColumn(label: Expanded(child:Text('Container No.', style: lblRoboStyle(fntSize))), 
               numeric: false, onSort: (i,b){},),
             DataColumn(label: Expanded(child: Text('Size', style: lblRoboStyle(fntSize))), 
               numeric: false, onSort: (i,b){},),
             DataColumn(label: Expanded(child:Text('Type', style: lblRoboStyle(fntSize))), 
               numeric: false, onSort: (i,b){},),
-          ],
+            ],
           rows: surPGInHdList.map((sPGInHdlist) => DataRow(
+          
                 //onSelectChanged: (b){},
                 //selected: false,
                 cells: <DataCell>[
-                  DataCell(SizedBox.fromSize(size: Size(200, 50),
+                  DataCell(SizedBox.fromSize(size: Size(200, 100),
                             child:Text(sPGInHdlist.documentNo, 
                             style: txtRoboULStyle(fntSize), softWrap: true,)),
                             onTap: (){ widget.loginUsrInfo.preGInDocNo = sPGInHdlist.documentNo ; sur._showSurveyScreen(context, widget.loginUsrInfo);}),
@@ -182,7 +201,7 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
                             child:Text(sPGInHdlist.contType, style: txtRoboStyle(fntSize), softWrap: true))),
                 ]
           )).toList()
-        );
+        ));
     });
   }
 

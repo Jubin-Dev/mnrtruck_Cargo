@@ -55,7 +55,11 @@ flutter:
     - lib/img/survey.png
     - lib/img/cargo-ship-boat-pngrepo-com.png
     - lib/img/logout.png
-    - lib/img/emc-container-tracking-resume-asset-solutions-from-safetrac-safe-trac-ltd.png
+    - lib/img/emc-container.png
+    - lib/img/cargo-container.png
+    - lib/img/553675_orig.png
+    - lib/img/hypad-container.png
+    - lib/img/Container-and-Intermodal.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
