@@ -11,6 +11,7 @@ import 'package:m_n_r/src/txtCss.dart';
 import 'package:m_n_r/src/models/pregateinmodel.dart';
 import 'package:m_n_r/src/screens/imageCollector.dart';
 import 'package:m_n_r/src/models/surveymodel.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class Survey extends StatefulWidget {
 
@@ -96,43 +97,52 @@ class SurveyHome extends State<Survey> with TxtCss {
     var bloc =Provider.of(context);
     sizeHW = MediaQuery.of(context).size;
 
-    if (widget.loginInfo.preGInDocNo.isNotEmpty || widget.loginInfo.preGInDocNo != '')
-    { getFillLookups(bloc); 
-      //bloc.fetchPGI2Survey(widget.loginInfo); 
-    }
+    //#JUBIN(3/4/19): made changes below screen for floating button to add survey
+    // if (widget.loginInfo.preGInDocNo.isNotEmpty || widget.loginInfo.preGInDocNo != ''
+    //     || widget.loginInfo.preGInDocNo != null)
+    if (widget.loginInfo.preGInDocNo != null)
+      { if (widget.loginInfo.preGInDocNo.isNotEmpty || widget.loginInfo.preGInDocNo != '')
+        { getFillLookups(bloc); }
+      }    //bloc.fetchPGI2Survey(widget.loginInfo); 
 
     return MaterialApp(
       title: 'Container Survey',
       home: Scaffold(
         appBar: AppBar(centerTitle: true,
-          actions: <Widget>[ 
-            IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
-              onPressed: (){Navigator.push(context, new MaterialPageRoute(
-                builder: (context) =>
-                new InitScreen(loginInfo: widget.loginInfo),
-                maintainState: false));},),
-            IconButton(icon: Icon(Icons.save), 
-                                onPressed: (){ saveSurvey(bloc);},),],
-          title: Text('Container Survey', style: txtRoboBoldHiLightColor(30, Colors.white),),),
-          // floatingActionButton: FloatingActionButton(child: Text('Save', style: txtRoboNormalHiLightColor(20, Colors.white),),
-          //                       onPressed: (){ saveSurvey(bloc);}, ),
-          body: containerSurveyScreen(context, bloc),
+          bottomOpacity: 2.0,
+          backgroundColor: Color(0XFF0091EA),
+          elevation: 10.0,
+            actions: <Widget>[
+
+                IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
+                    onPressed: (){Navigator.push(context, new MaterialPageRoute(
+                      builder: (context) =>
+                      new InitScreen(loginInfo: widget.loginInfo),
+                      maintainState: false));},),
+
+                IconButton(icon: Icon(Icons.save),iconSize: 40.00, 
+                    onPressed: (){ saveSurvey(bloc);},),],
+                  title: Text('Container Survey', style: txtRoboBoldHiLightColor(25, Colors.white),),),
+                // floatingActionButton: FloatingActionButton(child: Text('Save', style: txtRoboNormalHiLightColor(20, Colors.white),),
+                //                       onPressed: (){ saveSurvey(bloc);}, ),
+                body: containerSurveyScreen(context, bloc),
       ),
     );
   }
 
   Widget containerSurveyScreen(BuildContext context, Bloc bloc) {
-    return SingleChildScrollView(child: Container(
+    return SingleChildScrollView(child: Card(elevation: 20.0,
+    child:Container(
       child: Column(
         children: <Widget>[
           Row( children: <Widget>[
-            Expanded(flex: 7, child: _displayPic(context, bloc)),
+            Expanded(flex: 6, child: _displayPic(context, bloc)),
             Expanded(flex: 3, child: _displayFields(bloc)),
           ],),
           Row(children: <Widget>[ Expanded(flex:10,child: _displayTblHeading() ),],),
           Row(children: <Widget>[ Expanded(flex:10, child: _displayDataTable(bloc),)],)  
         ],),
-    ));
+     ) ));
   }
 
   Widget _displayPic(BuildContext context, Bloc bloc){
@@ -143,8 +153,8 @@ class SurveyHome extends State<Survey> with TxtCss {
         height: ((45/100)*sizeHW.height),
         decoration: new BoxDecoration(
           image: new DecorationImage(
-            image: new AssetImage('lib/img/container.jpg'),
-            fit: BoxFit.fill,
+            image: new AssetImage('lib/img/553675_orig.png'),
+            fit: BoxFit.contain,
         ),),),
     );
   }
@@ -180,10 +190,10 @@ class SurveyHome extends State<Survey> with TxtCss {
   }
   
   Widget _displayTblHeading(){
-    return Container(alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(color: Colors.lightBlueAccent[200]), 
+    return Container(alignment: Alignment.center,
+          decoration: BoxDecoration(color: Colors.lightBlueAccent[700]), 
           child: Text('  Damage Repair Summary',
-                  style: txtRoboBoldHiLightColor(30,Colors.white,)),
+                  style: txtRoboBoldHiLightColor(25,Colors.white,)),
     );
   }
 
@@ -199,7 +209,7 @@ class SurveyHome extends State<Survey> with TxtCss {
     await bloc.addlookUps(await fillLookups('ALL'));
     await bloc.addlookUps(await fillRepairCodes('ALL'));
     await bloc.fetchPGI2Survey(widget.loginInfo);
-    isFilled =true;
+    isFilled = true;
     return isFilled;
   }
 
@@ -224,9 +234,7 @@ class SurveyHome extends State<Survey> with TxtCss {
             ),
           );
         }
-      
       );
-    
   }
 
   Widget contSize(Bloc bloc){
@@ -259,7 +267,8 @@ class SurveyHome extends State<Survey> with TxtCss {
               isExpanded: true,
               elevation: 8,
             );
-              } else { return CircularProgressIndicator();}
+              } else { return JumpingDotsProgressIndicator(
+                fontSize: 30.0,color: Colors.blue,);}
             });
     });
   }
@@ -295,7 +304,8 @@ class SurveyHome extends State<Survey> with TxtCss {
               isExpanded: true,
               elevation: 8,
             );
-            } else {return CircularProgressIndicator();}
+            } else {return JumpingDotsProgressIndicator(
+              fontSize: 30.0,color: Colors.blue,);}
           });   
       });
   }
@@ -356,7 +366,8 @@ class SurveyHome extends State<Survey> with TxtCss {
             }
             else
             {
-              return CircularProgressIndicator();
+              return JumpingDotsProgressIndicator(
+              fontSize: 30.0,color: Colors.blue,);
             }
           }
         );
@@ -447,7 +458,9 @@ class SurveyHome extends State<Survey> with TxtCss {
                 iconSize: 40,
                 elevation: 8,
               ));
-              } else {return CircularProgressIndicator();}
+              } else {return JumpingDotsProgressIndicator(
+  fontSize: 30.0,color: Colors.blue,
+);}
             });
         });
     }
@@ -485,7 +498,9 @@ class SurveyHome extends State<Survey> with TxtCss {
                 iconSize: 40,              
                 elevation: 8,
               ));
-              } else {return CircularProgressIndicator();}
+              } else {return JumpingDotsProgressIndicator(
+  fontSize: 30.0,color: Colors.blue,
+);}
             });
         });
     }
@@ -522,7 +537,8 @@ class SurveyHome extends State<Survey> with TxtCss {
                 iconSize: 40,              
                 elevation: 8,
               ));
-              } else {return CircularProgressIndicator();}
+              } else {return  JumpingDotsProgressIndicator(
+                  fontSize: 30.0,color: Colors.blue,);}
             });
         });
     }
@@ -536,7 +552,7 @@ class SurveyHome extends State<Survey> with TxtCss {
           children: <Widget>[
             Expanded(flex:1,child: 
               Container(alignment: Alignment.center,
-                        decoration: BoxDecoration(color: Colors.lightBlueAccent[200]), 
+                        decoration: BoxDecoration(color: Colors.lightBlueAccent[700],), 
                         child: Text('Damage Repair Summary',style: txtRoboNormalHiLightColor(25,Colors.white),))),
             SizedBox(height: 20,),
             Container(child:damageCodeList(bloc)),
@@ -548,19 +564,21 @@ class SurveyHome extends State<Survey> with TxtCss {
             Row(mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
               SizedBox(width: 350),
-              Expanded( child: new OutlineButton(  
+              Expanded( child: new MaterialButton(  
+                color: Colors.lightBlueAccent[700],
                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
-                child: new Text("Close", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
+                child: new Text("Close", style: txtRoboBoldHiLightColor(25, Colors.white)),
                 onPressed: () {Navigator.of(contxt).pop();},
-                borderSide: BorderSide(color: Colors.blue),
+                // borderSide: BorderSide(color: Colors.blue),
                 //shape: StadiumBorder(),
               )),
               SizedBox(width: 20.0,),
-              Expanded( child: new OutlineButton(
+              Expanded( child: new MaterialButton(
+                color: Colors.lightBlueAccent[700],
                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
-                child: new Text("Save", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
+                child: new Text("Save", style: txtRoboBoldHiLightColor(25, Colors.white)),
                 onPressed: () {Navigator.of(contxt).pop(); bloc.addSurDetail();},
-                borderSide: BorderSide(color: Colors.blue),
+                // borderSide: BorderSide(color: Colors.blue),
               )),
               SizedBox(width: 10.0,),
             ],),
@@ -738,7 +756,7 @@ getValue() => (controller.offset~/widget.height) + widget.min;
                     Image.network(damagecode.imageSource) :
                     Image.asset(damagecode.imageSource, alignment: Alignment.centerRight,)), onTap: (){sur.showImage(context, bloc,damagecode);}),
                 DataCell(SizedBox.fromSize(size: Size(50, 50),
-                          child: IconButton(icon: Icon(Icons.delete), iconSize: 30, onPressed: (){sur.deleteCodes(bloc, damagecode);}))),                
+                          child: IconButton(icon: Icon(Icons.delete),color: Colors.redAccent, iconSize: 30, onPressed: (){sur.deleteCodes(bloc, damagecode);}))),                
               ]
         )).toList()
       );

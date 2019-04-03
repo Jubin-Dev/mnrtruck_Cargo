@@ -27,14 +27,16 @@ class _ImgCollector extends State<ImageCollector>
     return MaterialApp(
             title: 'Expected Repair Pictures',
             home: Scaffold(
-              appBar: new AppBar(title: new Text('Image Picker'), centerTitle: true, 
-                            actions: <Widget>[
-                              IconButton(onPressed: () {Navigator.of(context).pop(pic);}, 
-                                         icon: Icon(Icons.arrow_back)) ], ),
+              appBar: new AppBar(title: new Text('Image Picker'),
+               centerTitle: true, 
+               backgroundColor: Color(0XFF0091EA),
+               bottomOpacity: 2.0,
+               elevation: 10.0,
+                leading:  IconButton(onPressed: () {Navigator.of(context).pop(pic);}, 
+                icon: Icon(Icons.arrow_back))  ),
               body: new Center(child: pic == null ? Text('No Image selected') : new Image.file(pic),),
-              floatingActionButton: FloatingActionButton(onPressed: getImage, tooltip: 'Image Pick', child: Icon(Icons.camera),),
+              floatingActionButton: FloatingActionButton(onPressed: getImage, tooltip: 'Image Pick', child: Icon(Icons.camera_alt),),
             ),
-    );
-  }
-
-}
+        );
+      }
+    }

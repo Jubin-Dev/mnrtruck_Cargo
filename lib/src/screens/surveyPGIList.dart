@@ -43,6 +43,8 @@ class SurveyPGInHome extends State<SurveyPGIn> with TxtCss {
                             new InitScreen(loginInfo: widget.loginInfo),
                             maintainState: false));},),],),          
               body: surveyPGInScreen(context, bloc),
+
+         //#JUBIN(3/4/19):  changes below code
               floatingActionButton: new FloatingActionButton(
                 backgroundColor: Colors.greenAccent[700],
                 elevation: 10.0,
@@ -62,8 +64,9 @@ Widget surveyPGInScreen(BuildContext context, Bloc bloc) {
     return SingleChildScrollView(child: Container(
       child: Column(
         children: <Widget>[
+           //#JUBIN(3/4/19): made changes below code for floating button to add survey in under scaffold Widgets
         //   Row( mainAxisAlignment: MainAxisAlignment.end,
-        //     children: <Widget>[ FloatingActionButton( 
+        //     children: <Widget>[ RaisedButton( 
         //                           child: Text('+ Add Survey'), onPressed: (){_showSurveyScreen(context, widget.loginInfo);},),
         //                         SizedBox(width: 20,)],),
           // Row(children: <Widget>[ Expanded(flex:10,child: _displayTblHeading() ),],),

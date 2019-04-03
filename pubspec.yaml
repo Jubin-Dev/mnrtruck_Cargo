@@ -46,10 +46,10 @@ flutter:
   uses-material-design: true
   assets:
     - lib/img/loginShip.png
-    - lib/img/container.jpg
+    - lib/img/553675_orig.png
     - lib/img/virgoleoSolutions.png
     - lib/img/Pregatein.jpg
-    - lib/img/camera.png
+    - lib/img/photo-camera.png
     - lib/img/containerSurvey.jpeg
     - lib/img/report.png
     - lib/img/survey.png

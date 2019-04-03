@@ -45,7 +45,7 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
 
   @override
   Widget build(context){
-    var bloc =Provider.of(context);
+    var bloc = Provider.of(context);
     return MaterialApp(
       title: 'Container Status Update',
       home: Scaffold(

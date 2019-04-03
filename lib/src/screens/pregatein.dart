@@ -206,7 +206,6 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                   ),
                   Expanded(flex:0,child: 
                     Container(
-                      
                       // elevation: 20.0,
                       // color: Colors.lightBlueAccent[700],
                       // clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -273,7 +272,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                                           child: Text(dropDownStringitem.lookupDescription,
                                                   style: txtRoboStyle(20),)
                                           );
-              },
+                    },
               ).toList(),
               onChanged: bloc.changeSize,
               value: snapshot.data,
@@ -284,10 +283,9 @@ class PregateInHome extends State<PregateIn> with TxtCss {
               elevation: 8,
             );
               } else { return JumpingDotsProgressIndicator(
-  fontSize: 30.0,color: Colors.blue,
-);}
+  fontSize: 30.0,color: Colors.blue,);}
             });
-    });
+          });
   }
 
   Widget contType(Bloc bloc){
