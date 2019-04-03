@@ -79,14 +79,21 @@ class PregateInHome extends State<PregateIn> with TxtCss {
           centerTitle: true,bottomOpacity: 2.0,
           backgroundColor: Color(0XFF0091EA),
           elevation: 10.0,
-                      actions: <Widget>[
-                        IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
+          leading: IconButton(icon: Icon(Icons.arrow_back), iconSize: 40.00,
+                              tooltip: 'Go Home', 
                         onPressed: (){Navigator.push(context, new MaterialPageRoute(
                                       builder: (context) =>
                                       new InitScreen(loginInfo: widget.loginInfo),
                                       maintainState: false));},),
-                        SizedBox(width: 20.00),              
-                        IconButton(icon: Icon(Icons.save), iconSize: 40.00, 
+                        actions: <Widget>[
+                        // IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
+                        // onPressed: (){Navigator.push(context, new MaterialPageRoute(
+                        //               builder: (context) =>
+                        //               new InitScreen(loginInfo: widget.loginInfo),
+                        //               maintainState: false));},),
+                        // SizedBox(width: 20.00),              
+                        IconButton(icon: Icon(Icons.save), iconSize: 40.00,
+                        tooltip: 'Save', 
                         onPressed: () { savePreGateIn(preGInbloc);})], ),
         body: new Stack(
           overflow: Overflow.clip,
@@ -106,35 +113,40 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                       padding: EdgeInsets.only(left:3.0, right: 2.0),
                       decoration: new BoxDecoration(
                         color: Colors.white,
-                      ),
+                        ),
                     child:
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
+                          SizedBox(height: 5.0),
                           contNoFld(preGInbloc),
+                          SizedBox(height: 8.0),
                           Row(children: <Widget>[
                             Expanded(child:contSize(preGInbloc)),
                             SizedBox(width: gapHight),
                             Expanded(child: contType(preGInbloc)),
-                            ],),
-                        //SizedBox(height: gapHight),
+                            ]),
+                        SizedBox(height: 12.0),
                         //Text('Reefer Unit',textAlign: TextAlign.left,style:lblRoboStyle(25.00)),
                         Row( children: <Widget>[
                             Expanded(child:Text('Truck No.',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
-                            SizedBox(width: gapHight,),
+                            SizedBox(width: gapHight),
                             Expanded(child:truckNoFld(preGInbloc)),
                         ]),
+                        SizedBox(height: 12.0),
                         Row( children: <Widget>[
                             Expanded(child:Text('Truck Category',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
-                            SizedBox(width: gapHight,),
+                            SizedBox(width: gapHight),
                             Expanded(child:truckCategory(preGInbloc)),
                         ]),
+                        SizedBox(height: 10.0),
                         Row( children: <Widget>[
                             Expanded(child:Text('Container Status',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
                             Expanded(child:contStatus(preGInbloc)),
-                        ]),                                         
+                        ]),
+                        SizedBox(height: 12.0),                                         
                         // Row( children: <Widget>[
                         //     Expanded(child:Text('Electrical Cable',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                         //     SizedBox(width: gapHight,),
@@ -144,7 +156,8 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                             Expanded(child:Text('Air Guide',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
                             Expanded(child:airGuide(preGInbloc)),
-                        ]),                      
+                        ]),
+                        SizedBox(height: 12.0),                      
                         // Row( children: <Widget>[
                         //     Expanded(child:Text('H M C',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                         //     SizedBox(width: gapHight,),
@@ -155,21 +168,25 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                             SizedBox(width: gapHight,),
                             Expanded(child:vent(preGInbloc)),
                         ]),
+                        SizedBox(height: 12.0),
                         Row( children: <Widget>[
                             Expanded(child:Text('Running',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
                             Expanded(child:running(preGInbloc)),
-                        ]), 
+                        ]),
+                        SizedBox(height: 12.0), 
                         Row( children: <Widget>[
                             Expanded(child:Text('Sticker Temp.',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
                             Expanded(child:stickerTempFld(preGInbloc)),
                         ]),
+                        SizedBox(height: 12.0),
                         Row( children: <Widget>[
                             Expanded(child:Text('Display Temp.',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                             SizedBox(width: gapHight,),
                             Expanded(child:displayTempFld(preGInbloc)),
                           ]),
+                          SizedBox(height: 12.0),
                         // Row( children: <Widget>[
                         //     Expanded(child:Text('Condition',textAlign: TextAlign.left,style:lblRoboStyle(lblFntSize))),
                         //     SizedBox(width: gapHight,),
@@ -244,7 +261,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                                         .catchError((onError) {_showAlert(context, onError.toString());}); },
             decoration: InputDecoration(
             labelStyle: lblRoboStyle(20),
-            hintText: 'CONT0000000',
+            // hintText: 'CONT0000000',
             labelText: 'Container No.',
             errorText: snapshot.error,
             ),
@@ -272,7 +289,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
                                           child: Text(dropDownStringitem.lookupDescription,
                                                   style: txtRoboStyle(20),)
                                           );
-                    },
+                              },
               ).toList(),
               onChanged: bloc.changeSize,
               value: snapshot.data,
@@ -283,12 +300,12 @@ class PregateInHome extends State<PregateIn> with TxtCss {
               elevation: 8,
             );
               } else { return JumpingDotsProgressIndicator(
-  fontSize: 30.0,color: Colors.blue,);}
+              fontSize: 30.0,color: Colors.blue,);}
             });
           });
-  }
+        }
 
-  Widget contType(Bloc bloc){
+Widget contType(Bloc bloc){
     return StreamBuilder(
       stream: bloc.cntType,
       builder: (context, snapshot) 
@@ -593,7 +610,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
         value: snapshot.data,
         //value: bloc.getBrCode(),
         style: txtRoboStyle(20),
-        hint: Text('running'),
+        hint: Text('Running'),
         isExpanded: true,
         elevation: 8,
       );
@@ -693,7 +710,7 @@ class PregateInHome extends State<PregateIn> with TxtCss {
             //keyboardType: TextInputType.emailAddress
             decoration: InputDecoration(
             labelStyle: txtRoboStyle(20),
-            hintText: 'additional requirements',
+            hintText: 'Additional requirements',
             //labelText: 'Display',
             errorText: snapshot.error,
             ),

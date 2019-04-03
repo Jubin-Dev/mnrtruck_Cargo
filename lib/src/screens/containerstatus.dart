@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:m_n_r/src/models/containerStatusModel.dart';
 import 'package:m_n_r/src/models/pregateinmodel.dart';
+import 'package:m_n_r/src/screens/initScreen.dart';
 import 'package:m_n_r/src/txtCss.dart';
 import 'package:m_n_r/src/models/usermodel.dart';
 import 'package:m_n_r/src/blocs/bloc.dart';
@@ -54,6 +55,12 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
           bottomOpacity: 2.0,
           backgroundColor: Color(0XFF0091EA),
           elevation: 10.0,
+          leading: IconButton(icon: Icon(Icons.arrow_back), iconSize: 40.00,
+                              tooltip: 'Go Home', 
+                        onPressed: (){Navigator.push(context, new MaterialPageRoute(
+                                      builder: (context) =>
+                                      new InitScreen(loginInfo: widget.loginInfo),
+                                      maintainState: false));},),
         ),
         body: containerStatusScreen(bloc),
       ),
@@ -71,12 +78,13 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
   Widget _displayFeilds(Bloc bloc){
     return  SingleChildScrollView( child: 
       Card( 
-        elevation: 10.0,
+        elevation: 20.0,
         clipBehavior: Clip.antiAliasWithSaveLayer,
-             //height: 400.00, width:600.00 ,
-      // alignment: Alignment.center,
-       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),),
-      // padding: EdgeInsets.all(10),      
+        child:Container(
+             height: 400.00, width:600.00 ,
+      alignment: Alignment.center,
+      //  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),),
+      padding: EdgeInsets.all(15),      
       child: Column(
         children: <Widget>[
           txtfldContNo(bloc),
@@ -86,7 +94,7 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
           ddcontStatus(bloc),
           SizedBox(height: 20.00),
           txtFldremarks(bloc),
-          SizedBox(height: 20.00),
+          SizedBox(height: 50.00),
           Row(mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
             SizedBox(width: 250),
@@ -110,7 +118,7 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
           ],),
         ],
       ),
-    ));
+    )));
   }
 
   Widget txtfldContNo(Bloc bloc){
@@ -129,7 +137,7 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
             //                             .catchError((onError) {_showAlert(context, onError.toString());}); },
             decoration: InputDecoration(
             labelStyle: lblRoboStyle(20),
-            hintText: 'CONT0000000',
+            // hintText: 'CONT0000000',
             labelText: 'Container No.',
             errorText: snapshot.error,
             ),
@@ -202,10 +210,12 @@ class ContainerStatusHome extends State<ContainerStatus> with TxtCss {
     builder: (context, snapshot) { 
       return TextField(
         style: txtRoboStyle(20),
-        onChanged: bloc.changecsRemarks,  
+        onChanged: bloc.changecsRemarks, 
+        keyboardType: TextInputType.multiline,
+        maxLines: 2, 
         decoration: InputDecoration(
         labelStyle: lblRoboStyle(20),
-        hintText: 'remarks',
+        // hintText: 'remarks',
         labelText: 'Remarks:',
         errorText: snapshot.error,
         ),

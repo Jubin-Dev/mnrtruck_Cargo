@@ -36,15 +36,21 @@ class SurveyPGInHome extends State<SurveyPGIn> with TxtCss {
                       bottomOpacity: 2.0,
                       backgroundColor: Color(0XFF0091EA),
                       elevation: 10.0,
-          actions: <Widget>[ 
-            IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
-              onPressed: (){Navigator.push(context, new MaterialPageRoute(
+                      leading: IconButton(icon: Icon(Icons.arrow_back), iconSize: 40.00,
+                      onPressed: (){Navigator.push(context, new MaterialPageRoute(
                             builder: (context) =>
                             new InitScreen(loginInfo: widget.loginInfo),
-                            maintainState: false));},),],),          
-              body: surveyPGInScreen(context, bloc),
+                            maintainState: false));},),),
+                            body: surveyPGInScreen(context, bloc),
+          // actions: <Widget>[ 
+          //   IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
+          //     onPressed: (){Navigator.push(context, new MaterialPageRoute(
+          //                   builder: (context) =>
+          //                   new InitScreen(loginInfo: widget.loginInfo),
+          //                   maintainState: false));},),],),          
+              
 
-         //#JUBIN(3/4/19):  changes below code
+         //#JUBIN(3/4/19):  replaced below code in place of raised button
               floatingActionButton: new FloatingActionButton(
                 backgroundColor: Colors.greenAccent[700],
                 elevation: 10.0,

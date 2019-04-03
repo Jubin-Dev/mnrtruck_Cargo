@@ -37,7 +37,7 @@ class LoginScreenHome extends State<LoginScreen>
   // }  
 
   LoginUserInfo _loginUserInfo;
-
+  
   List<Branch> _branches = [];
   int selectedBranchID = 0;
   bool isGotBranchs= false;

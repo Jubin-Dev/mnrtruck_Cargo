@@ -112,17 +112,15 @@ class SurveyHome extends State<Survey> with TxtCss {
           bottomOpacity: 2.0,
           backgroundColor: Color(0XFF0091EA),
           elevation: 10.0,
-            actions: <Widget>[
-
-                IconButton(icon: Icon(Icons.home), iconSize: 40.00, 
+          leading: IconButton(icon: Icon(Icons.arrow_back), iconSize: 40.00, 
                     onPressed: (){Navigator.push(context, new MaterialPageRoute(
                       builder: (context) =>
                       new InitScreen(loginInfo: widget.loginInfo),
                       maintainState: false));},),
-
+            actions: <Widget>[
                 IconButton(icon: Icon(Icons.save),iconSize: 40.00, 
                     onPressed: (){ saveSurvey(bloc);},),],
-                  title: Text('Container Survey', style: txtRoboBoldHiLightColor(25, Colors.white),),),
+                    title: Text('Container Survey', style: txtRoboBoldHiLightColor(25, Colors.white),),),
                 // floatingActionButton: FloatingActionButton(child: Text('Save', style: txtRoboNormalHiLightColor(20, Colors.white),),
                 //                       onPressed: (){ saveSurvey(bloc);}, ),
                 body: containerSurveyScreen(context, bloc),
@@ -172,17 +170,21 @@ class SurveyHome extends State<Survey> with TxtCss {
                                         Expanded(flex:6, child: contNoFld(bloc)),
                                         //Expanded(flex:1, child: IconButton(icon: new Icon(Icons.search),onPressed: (){},))
                                         ]),
+                                        SizedBox(height: 5.0,),
                 Row(children: <Widget>[ Expanded(flex:4, child: Text('Size / Type', style: lblRoboStyle(20)),), 
                                         Expanded(flex:3, child: contSize(bloc)), SizedBox(width: 10),
-                                        Expanded(flex:3, child: contType(bloc))],),                                    
+                                        Expanded(flex:3, child: contType(bloc))],),
+                                        SizedBox(height: 5.0,),                                    
                 Row(children: <Widget>[ Expanded(flex:4, child: Text('E.I.R. No.', style: lblRoboStyle(20)),), 
                                         Expanded(flex:6, child: txtEirNo(bloc))],),
+                                        SizedBox(height: 5.0,),
                 Row(children: <Widget>[ Expanded(flex:4, child: Text('Agent Code', style: lblRoboStyle(20)),), 
                                         Expanded(flex:6, child: agentCode(bloc)),
                                         //Expanded(flex:1, child: IconButton(icon: new Icon(Icons.search),onPressed: (){},))
                                         ],),
                 Row(children: <Widget>[ Expanded(flex:4, child: Text('Yard Location', style: lblRoboStyle(20)),), 
                                         Expanded(flex:6, child: yardLoc(bloc))],),
+                                        SizedBox(height: 5.0,),
                 Row(children: <Widget>[ Expanded(flex:4, child: Text('Remarks', style: lblRoboStyle(20)),), 
                                         Expanded(flex:6, child: remarks(bloc))],),
               ],),
@@ -394,9 +396,9 @@ class SurveyHome extends State<Survey> with TxtCss {
             hintText: '',
             labelText: 'Agent Code',
             //errorText: snapshot.error,
-            ),
-          );
-        }
+              ),
+            );
+          }
       );
   }
 
@@ -413,6 +415,7 @@ class SurveyHome extends State<Survey> with TxtCss {
           style: txtRoboStyle(20),
           onChanged: bloc.changesurRemarks,
           controller: _controller,
+          // maxLines: 2,
           //keyboardType: TextInputType.emailAddress
           decoration: InputDecoration(
           labelStyle: txtRoboStyle(20),
