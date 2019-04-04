@@ -158,38 +158,42 @@ class SurveyHome extends State<Survey> with TxtCss {
   }
   
   Widget _displayFields(Bloc bloc) {
-    return Container( 
-          width: ((29.59/100)*sizeHW.width),
-          height: ((45/100)*sizeHW.height),
-          padding: EdgeInsets.only(right:10.0),
-          child: 
-            Column( mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[        
-                Row(children: <Widget>[ Expanded(flex:4, child: Text('Container No.', style: lblRoboStyle(20)),), 
-                                        Expanded(flex:6, child: contNoFld(bloc)),
-                                        //Expanded(flex:1, child: IconButton(icon: new Icon(Icons.search),onPressed: (){},))
-                                        ]),
-                                        SizedBox(height: 5.0,),
-                Row(children: <Widget>[ Expanded(flex:4, child: Text('Size / Type', style: lblRoboStyle(20)),), 
-                                        Expanded(flex:3, child: contSize(bloc)), SizedBox(width: 10),
-                                        Expanded(flex:3, child: contType(bloc))],),
-                                        SizedBox(height: 5.0,),                                    
-                Row(children: <Widget>[ Expanded(flex:4, child: Text('E.I.R. No.', style: lblRoboStyle(20)),), 
-                                        Expanded(flex:6, child: txtEirNo(bloc))],),
-                                        SizedBox(height: 5.0,),
-                Row(children: <Widget>[ Expanded(flex:4, child: Text('Agent Code', style: lblRoboStyle(20)),), 
-                                        Expanded(flex:6, child: agentCode(bloc)),
-                                        //Expanded(flex:1, child: IconButton(icon: new Icon(Icons.search),onPressed: (){},))
-                                        ],),
-                Row(children: <Widget>[ Expanded(flex:4, child: Text('Yard Location', style: lblRoboStyle(20)),), 
-                                        Expanded(flex:6, child: yardLoc(bloc))],),
-                                        SizedBox(height: 5.0,),
-                Row(children: <Widget>[ Expanded(flex:4, child: Text('Remarks', style: lblRoboStyle(20)),), 
-                                        Expanded(flex:6, child: remarks(bloc))],),
-              ],),
-    );
-  }
+    return Card(
+            elevation: 15.0,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: 
+                Container( 
+                    width: ((29.59/100)*sizeHW.width),
+                    height: ((45/100)*sizeHW.height),
+                    padding: EdgeInsets.all(5.0),
+                      child:
+                          Column( mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[        
+                                Row(children: <Widget>[ Expanded(flex:4, child: Text('Container No.', style: lblRoboStyle(20)),), 
+                                                        Expanded(flex:6, child: contNoFld(bloc)),
+                                                        //Expanded(flex:1, child: IconButton(icon: new Icon(Icons.search),onPressed: (){},))
+                                                        ]),
+                                                        SizedBox(height: 5.0,),
+                                Row(children: <Widget>[ Expanded(flex:4, child: Text('Size / Type', style: lblRoboStyle(20)),), 
+                                                        Expanded(flex:3, child: contSize(bloc)), SizedBox(width: 10),
+                                                        Expanded(flex:3, child: contType(bloc))],),
+                                                        SizedBox(height: 5.0,),                                    
+                                Row(children: <Widget>[ Expanded(flex:4, child: Text('E.I.R. No.', style: lblRoboStyle(20)),), 
+                                                        Expanded(flex:6, child: txtEirNo(bloc))],),
+                                                        SizedBox(height: 5.0,),
+                                Row(children: <Widget>[ Expanded(flex:4, child: Text('Agent Code', style: lblRoboStyle(20)),), 
+                                                        Expanded(flex:6, child: agentCode(bloc)),
+                                                        //Expanded(flex:1, child: IconButton(icon: new Icon(Icons.search),onPressed: (){},))
+                                                        ],),
+                                Row(children: <Widget>[ Expanded(flex:4, child: Text('Yard Location', style: lblRoboStyle(20)),), 
+                                                        Expanded(flex:6, child: yardLoc(bloc))],),
+                                                        SizedBox(height: 5.0,),
+                                Row(children: <Widget>[ Expanded(flex:4, child: Text('Remarks', style: lblRoboStyle(20)),), 
+                                                        Expanded(flex:6, child: remarks(bloc))],),
+                        ],),
+              ) );
+            }
   
   Widget _displayTblHeading(){
     return Container(alignment: Alignment.center,
@@ -748,13 +752,13 @@ getValue() => (controller.offset~/widget.height) + widget.min;
               //onSelectChanged: (b){},
               //selected: false,
               cells: <DataCell>[
-                DataCell(SizedBox.fromSize(size: Size(200, 50),
+                DataCell(SizedBox.fromSize(size: Size(200, 51),
                           child:Text(bloc.retriveDescription(damagecode.damageCode.toString(),'Damage'),softWrap: true,))),
-                DataCell(SizedBox.fromSize(size: Size(200, 50),
+                DataCell(SizedBox.fromSize(size: Size(200, 51),
                           child:Text(bloc.retriveDescription(damagecode.repairCode, 'Repair'),softWrap: true))),
-                DataCell(SizedBox.fromSize(size: Size(200, 50),
+                DataCell(SizedBox.fromSize(size: Size(200, 51),
                           child: Text(bloc.retriveDescription(damagecode.repairLocation, 'Repair'),softWrap: true))),
-                DataCell(SizedBox.fromSize(size: Size(50, 50),
+                DataCell(SizedBox.fromSize(size: Size(50, 35),
                   child: damagecode.isNetWorkImage ? 
                     Image.network(damagecode.imageSource) :
                     Image.asset(damagecode.imageSource, alignment: Alignment.centerRight,)), onTap: (){sur.showImage(context, bloc,damagecode);}),
@@ -765,7 +769,6 @@ getValue() => (controller.offset~/widget.height) + widget.min;
       );
     });
   }
-
 }
 
 File pic;

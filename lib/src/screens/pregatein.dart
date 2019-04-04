@@ -1064,21 +1064,21 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
                 //onSelectChanged: (b){},
                 //selected: false,
                 cells: <DataCell>[
-                  DataCell(SizedBox.fromSize(size: Size(150, 50),
+                  DataCell(SizedBox.fromSize(size: Size(150, 51),
                             child:Text(bloc.retriveDescription(damagecode.damageCode.toString(),'Damage'),softWrap: true,))),
-                  DataCell(SizedBox.fromSize(size: Size(175, 50),
+                  DataCell(SizedBox.fromSize(size: Size(175, 51),
                             child:Text(bloc.retriveDescription(damagecode.repairCode, 'Repair'),softWrap: true))),
-                  DataCell(SizedBox.fromSize(size: Size(175, 50),
+                  DataCell(SizedBox.fromSize(size: Size(175, 51),
                             child: Text(bloc.retriveDescription(damagecode.repairLocation, 'Repair'),softWrap: true))),
-                  DataCell(SizedBox.fromSize(size: Size(70, 50),
+                  DataCell(SizedBox.fromSize(size: Size(70, 35),
                             child: Image.asset(damagecode.imageSource, alignment: Alignment.center,),),
                             onTap: (){pgi.showImage(context, bloc,damagecode);}) ,
                   DataCell(SizedBox.fromSize(size: Size(50, 50),
                             child: IconButton(icon: Icon(Icons.delete),color: Colors.redAccent,disabledColor: Colors.grey,tooltip: 'Delete', iconSize: 30,
-                             onPressed: (){pgi.deleteCodes(bloc, damagecode);}))),
-                ]
-          )).toList()
-        ));
+                            onPressed: (){pgi.deleteCodes(bloc, damagecode);}))),
+                    ]
+                )).toList()
+            ));
           //Rows manually display no of 1 row, 2 columns
           // rows: <DataRow>[
           //   DataRow(

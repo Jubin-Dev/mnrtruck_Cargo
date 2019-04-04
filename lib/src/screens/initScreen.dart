@@ -203,7 +203,7 @@ class InitScreen extends StatelessWidget {
                       //print('Entering Survey');
                       Navigator.push(context, new MaterialPageRoute(
                                                     builder: (context) =>
-                                                      new   RSPendingEquipJobs(loginInfo: this.loginInfo)));
+                                                      new RSPendingEquipJobs(loginInfo: this.loginInfo)));
                     }
                   
                     

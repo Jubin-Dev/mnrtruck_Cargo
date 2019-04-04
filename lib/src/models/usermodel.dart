@@ -6,7 +6,7 @@ class LoginUserInfo
   final String message;                //": "SUCCESS",
   final String role;                   //": "ADMIN",
   final String userID;                 //": "admin",
-  final String companyCode;   //": "sct",
+  final String companyCode;            //": "sct",
   final int branchId;                  //": 240,
   final String authToken;              //": "EF4A35B4-4A02-4FCD-BBA4-C4490A71D31F"
   String preGInDocNo;
@@ -29,11 +29,11 @@ class LoginUserInfo
 
 class User
 {
-  final String userID; //: "admin",
-  final String password; // ": "s3t",
-  final int branchId;  //": 240,
+  final String userID;      //: "admin",
+  final String password;    // ": "s3t",
+  final int branchId;       //": 240,
   final String companyCode; // = 'sct';,
-  final String yardCode;  //": "SCT EXP"
+  final String yardCode;    //": "SCT EXP"
  
 
   User({this.userID,this.password,this.branchId,this.yardCode,this.companyCode});
@@ -81,7 +81,7 @@ class Yard{
   factory Yard.fromJson(Map<String, dynamic> json)
   {
     return Yard(yardCode: json['yardCode'],
-                description: json['description']);
+          description: json['description']);
   }
 
 }

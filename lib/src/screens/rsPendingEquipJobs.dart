@@ -43,7 +43,7 @@ class RSPendingEquipJobsHome extends State<RSPendingEquipJobs> with TxtCss {
                             builder: (context) =>
                             new InitScreen(loginInfo: widget.loginInfo),
                             maintainState: false));},),),          
-          body: rsPendingJobs(context, bloc),
+              body: rsPendingJobs(context, bloc),
       ),
     );
   }
@@ -68,7 +68,7 @@ class RSPendingEquipJobsHome extends State<RSPendingEquipJobs> with TxtCss {
 
   Widget _displayDataTable(Bloc bloc) {
     //return Container(height: ((48.5/100)*sizeHW.height), color: Colors.blueAccent,);
-      NumScroller numscrl = new NumScroller(height:600.0, width: sizeHW.width, alignment: TextAlign.left,
+      NumScroller numscrl = new NumScroller(height:800.0, width: sizeHW.width, alignment: TextAlign.left,
                                             min:1, max:1000, bloc:bloc, loginUsrInfo: widget.loginInfo,);
       return numscrl;
   }
@@ -91,7 +91,6 @@ class RSPendingEquipJobsHome extends State<RSPendingEquipJobs> with TxtCss {
       },
     );
   }
-
 }
 
 class NumScroller extends StatefulWidget{
@@ -140,35 +139,43 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
 
   Widget dataTblDRCodeUpdate(Bloc bloc) {
     ReachStacker rsPEJobs = ReachStacker();
-    double fntSize = 15.0;
+    double fntSize = 14.0;
 
     return FutureBuilder(
       future: rsPEJobs.fetchRSList(widget.loginUsrInfo.branchId),
       builder:(context, ssPEJdata) {
         List rsPEJList = ssPEJdata.hasData ? ssPEJdata.data : <ReachStacker>[];
-        return DataTable(
-          sortAscending: false,
-          columns: <DataColumn>[
-            DataColumn(label: Expanded(child: Text('Activity', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Truck No.', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Container No.', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),              
-            DataColumn(label: Expanded(child: Text('Size', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Type', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Agent', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Booking BL No.', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Vessel', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),
-            DataColumn(label: Expanded(child:Text('Voyage', style: lblRoboStyle(fntSize))), 
-              numeric: false, onSort: (i,b){},),                                                      
-          ],
-          rows: rsPEJList.map((rsPEJob) => DataRow(
+        return Card(
+          elevation: 10.0,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          // margin: EdgeInsets.only(bottom: 20.0),
+          child:Container(
+            padding: EdgeInsets.only(top: 40.0),
+            height: 660.0,
+                  child:
+                    DataTable(
+                        sortAscending: false,
+                        columns: <DataColumn>[
+                          DataColumn(label: Expanded(child: Text('Activity', style: lblRoboStyle(fntSize))), 
+                            numeric: false, onSort: (i,b){},),
+                          DataColumn(label: Expanded(child:Text('Truck No.', style: lblRoboStyle(fntSize))), 
+                            numeric: false, onSort: (i,b){},),
+                          DataColumn(label: Expanded(child:Text('Container No.', style: lblRoboStyle(fntSize))), 
+                            numeric: false, onSort: (i,b){},),              
+                          DataColumn(label: Expanded(child: Text('Size / Type', style: lblRoboStyle(fntSize))), 
+                            numeric: false, onSort: (i,b){},),
+                          // DataColumn(label: Expanded(child:Text('Type', style: lblRoboStyle(fntSize))), 
+                          //   numeric: false, onSort: (i,b){},),
+                          DataColumn(label: Expanded(child:Text('Agent', style: lblRoboStyle(fntSize))), 
+                            numeric: false, onSort: (i,b){},),
+                          DataColumn(label: Expanded(child:Text('Booking BL No.', style: lblRoboStyle(fntSize))), 
+                            numeric: false, onSort: (i,b){},),
+                          DataColumn(label: Expanded(child:Text('Vessel', style: lblRoboStyle(fntSize))), 
+                            numeric: false, onSort: (i,b){},),
+                          DataColumn(label: Expanded(child:Text('Voyage', style: lblRoboStyle(fntSize))), 
+                              numeric: false, onSort: (i,b){},),                                                      
+                          ],
+                  rows: rsPEJList.map((rsPEJob) => DataRow(
                 //onSelectChanged: (b){},
                 //selected: false,
                 cells: <DataCell>[
@@ -181,11 +188,11 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
                   DataCell(SizedBox.fromSize(size: Size(125, 50),
                             child:Text(rsPEJob.containerNo, style: txtRoboULStyle(fntSize), softWrap: true)),
                             onTap: (){ _showrsPendingJobDetails(context, widget.loginUsrInfo, rsPEJob);}),
-                  DataCell(SizedBox.fromSize(size: Size(25, 50),
-                            child:Text(rsPEJob.size, style: txtRoboStyle(fntSize), softWrap: true,))),
-                  DataCell(SizedBox.fromSize(size: Size(25, 50),
-                            child:Text(rsPEJob.type, style: txtRoboStyle(fntSize), softWrap: true))),
                   DataCell(SizedBox.fromSize(size: Size(50, 50),
+                            child:Text(rsPEJob.size + ' / ' + rsPEJob.type, style: txtRoboStyle(fntSize), softWrap: true,))),
+                  // DataCell(SizedBox.fromSize(size: Size(25, 50),
+                  //           child:Text(rsPEJob.type, style: txtRoboStyle(fntSize), softWrap: true))),
+                  DataCell(SizedBox.fromSize(size: Size(60, 50),
                             child:Text(rsPEJob.agentCode, style: txtRoboStyle(fntSize), softWrap: true))),
                   DataCell(SizedBox.fromSize(size: Size(150, 50),
                             child:Text(rsPEJob.bookingBLNo, style: txtRoboStyle(fntSize), softWrap: true,))),
@@ -195,7 +202,7 @@ class NumScrollerState extends State<NumScroller> with TxtCss {
                             child:Text(rsPEJob.voyageNo, style: txtRoboStyle(fntSize), softWrap: true))),
                 ]
           )).toList()
-        );
+        )));
     });
   }
 

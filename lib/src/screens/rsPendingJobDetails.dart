@@ -75,7 +75,11 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
         elevation: 10.0,
         bottomOpacity: 2.0,
         backgroundColor: Color(0XFF0091EA),
-        title: Text('Reach Stacker Equipment Job Update', style: txtRoboBoldHiLightColor(25,Colors.white),),),
+        title: Text('Reach Stacker Equipment Job Update', style: txtRoboBoldHiLightColor(25,Colors.white),),
+        leading: IconButton(icon: Icon(Icons.arrow_back), iconSize: 40.00,
+                              tooltip: 'Go Home',
+                 onPressed: () {Navigator.of(context).pop();},              
+             )),
         body: rsPJDetail(bloc),
       ),
     );
@@ -104,9 +108,11 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
         children: <Widget>[
           txtfldContNo(bloc),
           SizedBox(height: 10.00),
-          ddcontSize(bloc),
-          SizedBox(height: 10.00),
-          ddcontType(bloc),
+          Row(children: <Widget>[
+          Expanded(child:ddcontSize(bloc)),
+          SizedBox(width: 25.00),
+          Expanded(child:ddcontType(bloc)),
+          ]),
           SizedBox(height: 10.00),
           txtAgentCode(bloc),
           SizedBox(height: 10.00),
@@ -121,7 +127,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
             Expanded( child: new MaterialButton(
               color: Colors.lightBlueAccent[700],  
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
-              child: new Text("Back", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
+              child: new Text("Back", style: txtRoboBoldHiLightColor(25, Colors.white)),
               onPressed: () {Navigator.of(context).pop();},
               // borderSide: BorderSide(color: Colors.blue),
               //shape: StadiumBorder(),
@@ -130,7 +136,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
             Expanded( child: new MaterialButton(
               color: Colors.lightBlueAccent[700],  
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.vertical()),
-              child: new Text("Save", style: txtRoboBoldHiLightColor(25, Colors.lightBlueAccent)),
+              child: new Text("Save", style: txtRoboBoldHiLightColor(25, Colors.white)),
               onPressed: () { saveRSPendingJob(bloc); Navigator.of(context).pop();},
               // borderSide: BorderSide(color: Colors.blue),
             )),
@@ -151,12 +157,12 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
           _controller.value.copyWith(text: snapshot.data);
           return TextField(
             textCapitalization: TextCapitalization.characters,
-            style: txtRoboStyle(20),
+            style: txtRoboStyle(30),
             onChanged: bloc.changersContNo,  
             controller: _controller,
             decoration: InputDecoration(
-            labelStyle: lblRoboStyle(20),
-            hintText: '',
+            labelStyle: lblRoboStyle(25),
+            // hintText: '',
             labelText: 'Container No.',
             errorText: snapshot.error,
             ),
@@ -185,7 +191,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
                                                   style: txtRoboStyle(20),)
                                           );
                                         },
-              ).toList(),
+                                ).toList(),
 
               onChanged: bloc.changersContSize,
               value: snapshot.data,
@@ -195,7 +201,9 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
               isExpanded: true,
               elevation: 8,
             );
-              } else { return CircularProgressIndicator();}
+              } else { return JumpingDotsProgressIndicator(
+                        fontSize: 40.0,color: Colors.blue,
+                      );}
             });
     });
   }
@@ -231,7 +239,9 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
               isExpanded: true,
               elevation: 8,
             );
-            } else {return CircularProgressIndicator();}
+            } else {return JumpingDotsProgressIndicator(
+            fontSize: 40.0,color: Colors.blue,
+          );}
           });   
       });
   }
@@ -288,7 +298,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
               elevation: 8,
             );
             } else {return JumpingDotsProgressIndicator(
-              fontSize: 50.0,color: Colors.blue,);}
+              fontSize: 40.0,color: Colors.blue,);}
           });   
       });
     }
@@ -327,7 +337,7 @@ class RSPendingJobDetailsHome extends State<RSPendingJobDetails> with TxtCss {
             else
             {
               return JumpingDotsProgressIndicator(
-              fontSize: 50.0,color: Colors.blue,);
+              fontSize: 40.0,color: Colors.blue,);
             }
           }
         );

@@ -14,20 +14,20 @@ class ReachStacker{
               this.voyageNo, this.agentCode, this.activity});
 
   factory ReachStacker.fromjSon(Map<String, dynamic> jSon) 
-  {
+  {                                         //#JUBIN(4/4/19):Changes to below code
     return ReachStacker(
-        branchID: jSon['branchID'], 
-        transactionKey: jSon['transactionKey'],
-        transactionNo: jSon['transactionNo'],
-        containerNo:jSon['containerNo'],
-        truckNo:jSon['truckNo'], 
-        size:jSon['size'], 
-        type:jSon['type'], 
-        bookingBLNo:jSon['bookingBLNo'], 
-        vesselCode:jSon['vesselCode'], 
-        voyageNo:jSon['voyageNo'], 
-        agentCode:jSon['agentCode'], 
-        activity:jSon['activity'],
+        branchID: (jSon['branchID'] == null) ? 0 : jSon['branchID'], 
+        transactionKey: (jSon['transactionKey'] == null) ? '' : jSon['transactionKey'],
+        transactionNo: (jSon['transactionNo'] == null) ? '' : jSon['transactionNo'],
+        containerNo: (jSon['containerNo'] == null) ? '' : jSon['containerNo'],
+        truckNo: (jSon['truckNo'] == null) ? '' : jSon['truckNo'], 
+        size: (jSon['size'] == null) ? '' : jSon['size'], 
+        type: (jSon['type'] == null) ? '' : jSon['type'], 
+        bookingBLNo: (jSon['bookingBLNo'] == null) ? '' : jSon['bookingBLNo'], 
+        vesselCode: (jSon['vesselCode'] == null ) ? '' : jSon['vesselCode'], 
+        voyageNo:  (jSon['voyageNo'] == null) ? '' : jSon['voyageNo'], 
+        agentCode: (jSon['agentCode']== null) ? '' : jSon['agentCode'], 
+        activity:  (jSon['activity'] == null) ? '' : jSon['activity'],
     );
   }              
 

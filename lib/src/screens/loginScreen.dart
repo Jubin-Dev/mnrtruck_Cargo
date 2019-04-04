@@ -163,10 +163,10 @@ class LoginScreenHome extends State<LoginScreen>
                                 Row(children:<Widget>[Expanded(child: passwordField(bloc,txtCss))]), 
                                 SizedBox(height:20.00),
                                 Row(children:<Widget>[Expanded(child: branchCodeList(bloc,txtCss))]),                               
-                                SizedBox(height:20.00),
+                                SizedBox(height:25.00),
                                 Row(children:<Widget>[Expanded(child: yardCodeList(bloc,txtCss))]),
                                 //yardCodeList(bloc, txtCss),
-                                SizedBox(height:25.00), 
+                                SizedBox(height:28.00), 
                                 Row(children:<Widget>[Expanded(child: submitButton(bloc,txtCss))]),
                                 //SizedBox(height:15.00),                                
                                 // Row(
@@ -352,13 +352,16 @@ class LoginScreenHome extends State<LoginScreen>
       stream: bloc.submitValid,
       builder: (context, snapshot) 
       {
-        return RaisedButton(
-          child: Text('Sign In',style: txtSS.btnTxtRoboStyle(20),),
-          color: Colors.indigo[600],
-          disabledColor: Colors.red[600],
-          textColor: Colors.white,
-          //shape: ,         
-          onPressed: !snapshot.hasData ? null : () 
+    return Container(
+      height: 50.0,
+            child:
+              RaisedButton(
+                  child: Text('Sign In',style: txtSS.btnTxtRoboStyle(25),),
+                  color: Colors.indigo[600],
+                  disabledColor: Colors.red[600],
+                  textColor: Colors.white,
+                  //shape: ,         
+                  onPressed: !snapshot.hasData ? null : () 
                                 async { 
                                   //LoginUserInfo logUser = 
                                   await checkUserLogin(bloc.getLoginUser())
@@ -383,7 +386,7 @@ class LoginScreenHome extends State<LoginScreen>
                                   // loginValidation(bloc); 
                                   // bloc.submit();
                                 }
-                    );
+                      ) );
                   },  
               );
             }
